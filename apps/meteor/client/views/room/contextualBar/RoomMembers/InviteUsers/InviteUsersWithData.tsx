@@ -27,7 +27,7 @@ const InviteUsersWithData = ({ rid, onClickBack }: InviteUsersWithDataProps): Re
 		setInviteState,
 	] = useState({
 		isEditing: false,
-		daysAndMaxUses: { days: '1', maxUses: '0' },
+		daysAndMaxUses: { days: '0', maxUses: '0' },
 		url: '',
 		caption: '',
 		error: undefined as Error | undefined,
