@@ -31,7 +31,7 @@ const UsersTable = ({ workspace = 'local' }): ReactElement => {
 	const canViewFullOtherUserInfo = usePermission('view-full-other-user-info');
 
 	const { current, itemsPerPage, setItemsPerPage: onSetItemsPerPage, setCurrent: onSetCurrent, ...paginationProps } = usePagination();
-	const { sortBy, sortDirection, setSort } = useSort<'name' | 'email' | 'origin' | 'createdAt'>('name');
+	const { sortBy, sortDirection, setSort } = useSort<'name' | 'email' | 'origin' | 'createdAt' | 'customFields'>('name');
 
 	const headers = useMemo(
 		() =>
@@ -73,6 +73,18 @@ const UsersTable = ({ workspace = 'local' }): ReactElement => {
 						width='x200'
 					>
 						{t('Joined_at')}
+					</GenericTableHeaderCell>
+				),
+				mediaQuery && (
+					<GenericTableHeaderCell
+						key='customFields'
+						direction={sortDirection}
+						active={sortBy === 'customFields'}
+						onClick={setSort}
+						sort='customFields'
+						width='x200'
+					>
+						{('Должность')}
 					</GenericTableHeaderCell>
 				),
 			].filter(Boolean),
