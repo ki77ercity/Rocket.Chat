@@ -204,6 +204,7 @@ const findUsers = async ({
 			name: 1,
 			nickname: 1,
 			bio: 1,
+			customFields: 1,
 			createdAt: 1,
 			...(viewFullOtherUserInfo && { emails: 1 }),
 			federation: 1,
@@ -218,6 +219,7 @@ const findUsers = async ({
 				username?: string;
 				name?: string;
 				bio?: string;
+				customFields?: string;
 				nickname?: string;
 				emails?: string;
 				federation?: unknown;
@@ -294,6 +296,7 @@ const getUsers = async (
 				username: user.username,
 				name: user.name,
 				bio: user.bio,
+				customFields: user.customFields,
 				nickname: user.nickname,
 				emails: user.emails,
 				federation: user.federation,
@@ -346,7 +349,7 @@ Meteor.methods<ServerMethods>({
 		}
 
 		const roomParams = ['channels', 'teams'].includes(type) ? ['usernames', 'lastMessage'] : [];
-		const userParams = type === 'users' ? ['username', 'email', 'bio'] : [];
+		const userParams = type === 'users' ? ['username', 'email', 'bio', 'customFields'] : [];
 
 		if (!['name', 'createdAt', 'usersCount', ...roomParams, ...userParams].includes(sortBy)) {
 			return;
