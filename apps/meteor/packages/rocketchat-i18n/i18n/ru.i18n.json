@@ -1,5 +1,6 @@
 {
   "500": "Внутренняя ошибка сервера",
+  "Join_rooms": "Объединенные комнаты",
   "__count__empty_rooms_will_be_removed_automatically": "{{count}}пустые комнаты будут удалены автоматически.",
   "__count__empty_rooms_will_be_removed_automatically__rooms__": "{{count}} пустых чатов будет удалено автоматически:<br/> {{rooms}}.",
   "__count__message_pruned": "{{count}} сообщение удалено",
