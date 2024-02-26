@@ -38,6 +38,18 @@ export const GenericFileAttachment = ({
 			openDocumentViewer(getURL(link), format, '');
 		}
 	};
+	const formats: string[] = [
+		'PNG', 'JPEG', 'GIF', 'RAW', 'TIFF', 'BMP',
+	]
+
+	const docfile = () => {
+		if (title) {
+			console.log('title', title)
+			if(!formats.includes(getFileExtension(title).toLocaleUpperCase())) {
+				return title
+			}
+		}
+	}
 
 	const getExternalUrl = () => {
 		if (!hasDownload || !link) return undefined;
@@ -55,7 +67,7 @@ export const GenericFileAttachment = ({
 					<MessageGenericPreviewContent
 						thumb={<MessageGenericPreviewIcon name='attachment-file' type={format || getFileExtension(title)} />}
 					>
-						<MessageGenericPreviewTitle externalUrl={getExternalUrl()} onClick={handleTitleClick} data-qa-type='attachment-title-link'>
+						<MessageGenericPreviewTitle download={docfile()} externalUrl={getExternalUrl()} onClick={handleTitleClick} data-qa-type='attachment-title-link'>
 							{title}
 						</MessageGenericPreviewTitle>
 						{size && (
