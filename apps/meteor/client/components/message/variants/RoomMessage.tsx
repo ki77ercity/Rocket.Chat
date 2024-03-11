@@ -21,6 +21,7 @@ import MessageToolboxHolder from '../MessageToolboxHolder';
 import StatusIndicators from '../StatusIndicators';
 import MessageAvatar from '../header/MessageAvatar';
 import RoomMessageContent from './room/RoomMessageContent';
+import { useGoToThread } from '/client/views/room/hooks/useGoToThread';
 
 type RoomMessageProps = {
 	message: IMessage & { ignored?: boolean };
@@ -59,8 +60,11 @@ const RoomMessage = ({
 	useCountSelected();
 
 	useJumpToMessage(message._id, messageRef);
+	const goToThread = useGoToThread();
+	const rid = message.rid;
 	return (
 		<Message
+			onDoubleClick={() => goToThread({ rid, tmid: message._id })}
 			ref={messageRef}
 			id={message._id}
 			onClick={selecting ? toggleSelected : undefined}
