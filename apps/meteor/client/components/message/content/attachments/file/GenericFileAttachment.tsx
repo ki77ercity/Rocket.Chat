@@ -44,7 +44,6 @@ export const GenericFileAttachment = ({
 
 	const docfile = () => {
 		if (title) {
-			console.log('title', title)
 			if(!formats.includes(getFileExtension(title).toLocaleUpperCase())) {
 				return title
 			}
