@@ -16,9 +16,6 @@ import UserCard from '../UserCard';
 import UserInfoAvatar from './UserInfoAvatar';
 import useClipboardWithToast from '/client/hooks/useClipboardWithToast';
 
-const deepLink = Meteor.settings.DeepLink_Url
-const host = Meteor.settings.Site_Url.replace(/^https?\:\/\//i, "");
-
 type UserInfoDataProps = Serialized<
 	Pick<
 		IUser,
@@ -69,6 +66,8 @@ const UserInfo = ({
 	const timeAgo = useTimeAgo();
 	const userDisplayName = useUserDisplayName({ name, username });
 	const userCustomFields = useUserCustomFields(customFields);
+	const deepLink = Meteor.settings.DeepLink_Url
+	const host = Meteor.settings.Site_Url.replace(/^https?\:\/\//i, "");
 	const linkText = deepLink+'/room?host='+host+'&path=direct/'+username
 	const { copy } = useClipboardWithToast(linkText);
 
