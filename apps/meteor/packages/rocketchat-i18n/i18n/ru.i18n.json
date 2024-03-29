@@ -6250,5 +6250,6 @@
   "Seat_limit_reached_Description": "В вашем рабочем пространстве исчерпан договорной лимит количества мест. Купите больше мест, чтобы добавить больше пользователей.",
   "Buy_more_seats": "Купить больше мест",
   "Password_must_have": "Пароль должен иметь:",
-  "The_application_will_be_able_to": "<1>{{appName}}</1> будет в состоянии:"
+  "The_application_will_be_able_to": "<1>{{appName}}</1> будет в состоянии:",
+  "Default_Invitation_link": "Срок действия пригласительных ссылок"
 }
