@@ -6251,5 +6251,8 @@
   "Buy_more_seats": "Купить больше мест",
   "Password_must_have": "Пароль должен иметь:",
   "The_application_will_be_able_to": "<1>{{appName}}</1> будет в состоянии:",
-  "Default_Invitation_link": "Срок действия пригласительных ссылок"
+  "Default_Invitation_link": "Срок действия пригласительных ссылок",
+  "CustomSettings_Description": "Кастомные настройки",
+  "Default_Invitation_link_Description": "Значение по умолчанию при создании ссылки",
+  "CustomSettings": "Общие настройки SMLT"
 }
