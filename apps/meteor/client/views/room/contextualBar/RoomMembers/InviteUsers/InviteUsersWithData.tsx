@@ -27,7 +27,7 @@ const InviteUsersWithData = ({ rid, onClickBack }: InviteUsersWithDataProps): Re
 		setInviteState,
 	] = useState({
 		isEditing: false,
-		daysAndMaxUses: { days: '0', maxUses: '0' },
+		daysAndMaxUses: { days: Meteor.settings.Default_Invitation_link, maxUses: '0' },
 		url: '',
 		caption: '',
 		error: undefined as Error | undefined,
