@@ -36,6 +36,7 @@ import { createUserDataSettings } from './userDataDownload';
 import { createVConfSettings } from './video-conference';
 import { createWebDavSettings } from './webdav';
 import { createWebRTCSettings } from './webrtc';
+import { createCustomSettings } from './custom-settings';
 
 async function createSettings() {
 	await Promise.all([
@@ -77,6 +78,7 @@ async function createSettings() {
 		createUserDataSettings(),
 		createWebDavSettings(),
 		createWebRTCSettings(),
+		createCustomSettings(),
 	]);
 }
 
