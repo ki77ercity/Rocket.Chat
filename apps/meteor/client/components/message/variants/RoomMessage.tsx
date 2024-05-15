@@ -46,6 +46,7 @@ const RoomMessage = ({
 	ignoredUser,
 	searchText,
 }: RoomMessageProps): ReactElement => {
+	const isMacOS = navigator.platform.indexOf('Mac') !== -1;
 	const uid = useUserId();
 	const editing = useIsMessageHighlight(message._id);
 	const [displayIgnoredMessage, toggleDisplayIgnoredMessage] = useToggle(false);
@@ -64,10 +65,29 @@ const RoomMessage = ({
 	const rid = message.rid;
 	return (
 		<Message
-			onDoubleClick={() => goToThread({ rid, tmid: message._id })}
+			//onDoubleClick={() => goToThread({ rid, tmid: message._id })}
+			style={{cursor: 'default'}}
 			ref={messageRef}
 			id={message._id}
-			onClick={selecting ? toggleSelected : undefined}
+			onClick={
+				(e) => {
+					selecting ? toggleSelected : undefined
+					if (isMacOS) {
+						if (e.metaKey) {
+							e.preventDefault();
+							e.stopPropagation();
+							goToThread({ rid, tmid: message._id })
+						};
+					}
+					else {
+						if(e.ctrlKey) {
+							e.preventDefault();
+							e.stopPropagation();
+							goToThread({ rid, tmid: message._id })
+						};
+					}
+				}
+			}
 			isSelected={selected}
 			isEditing={editing}
 			isPending={message.temp}
