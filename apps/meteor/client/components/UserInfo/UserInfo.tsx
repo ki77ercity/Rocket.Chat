@@ -187,7 +187,7 @@ const UserInfo = ({
 						</InfoPanel.Field>
 					)}
 					<InfoPanel.Field>
-						<InfoPanel.Label>{'Ссылка на профиль'}</InfoPanel.Label>
+						<InfoPanel.Label>{'Ссылка на профиль:'}</InfoPanel.Label>
 						<UrlInput value={linkText} addon={<Icon onClick={(): Promise<void> => copy()} name='copy' size='x20' />} />
 					</InfoPanel.Field>
 				</InfoPanel.Section>
