@@ -17,11 +17,10 @@ import { useJumpToMessage } from '../../../views/room/MessageList/hooks/useJumpT
 import { useChat } from '../../../views/room/contexts/ChatContext';
 import IgnoredContent from '../IgnoredContent';
 import MessageHeader from '../MessageHeader';
-import MessageToolboxHolder from '../MessageToolboxHolder';
+import MessageToolbarHolder from '../MessageToolbarHolder';
 import StatusIndicators from '../StatusIndicators';
 import MessageAvatar from '../header/MessageAvatar';
 import RoomMessageContent from './room/RoomMessageContent';
-import { useGoToThread } from '/client/views/room/hooks/useGoToThread';
 
 type RoomMessageProps = {
 	message: IMessage & { ignored?: boolean };
@@ -46,7 +45,6 @@ const RoomMessage = ({
 	ignoredUser,
 	searchText,
 }: RoomMessageProps): ReactElement => {
-	const isMacOS = navigator.platform.indexOf('Mac') !== -1;
 	const uid = useUserId();
 	const editing = useIsMessageHighlight(message._id);
 	const [displayIgnoredMessage, toggleDisplayIgnoredMessage] = useToggle(false);
@@ -61,33 +59,11 @@ const RoomMessage = ({
 	useCountSelected();
 
 	useJumpToMessage(message._id, messageRef);
-	const goToThread = useGoToThread();
-	const rid = message.rid;
 	return (
 		<Message
-			//onDoubleClick={() => goToThread({ rid, tmid: message._id })}
-			style={{cursor: 'default'}}
 			ref={messageRef}
 			id={message._id}
-			onClick={
-				(e) => {
-					selecting ? toggleSelected : undefined
-					if (isMacOS) {
-						if (e.metaKey) {
-							e.preventDefault();
-							e.stopPropagation();
-							goToThread({ rid, tmid: message._id })
-						};
-					}
-					else {
-						if(e.ctrlKey) {
-							e.preventDefault();
-							e.stopPropagation();
-							goToThread({ rid, tmid: message._id })
-						};
-					}
-				}
-			}
+			onClick={selecting ? toggleSelected : undefined}
 			isSelected={selected}
 			isEditing={editing}
 			isPending={message.temp}
@@ -128,7 +104,7 @@ const RoomMessage = ({
 					<RoomMessageContent message={message} unread={unread} mention={mention} all={all} searchText={searchText} />
 				)}
 			</MessageContainer>
-			{!message.private && <MessageToolboxHolder message={message} context={context} />}
+			{!message.private && <MessageToolbarHolder message={message} context={context} />}
 		</Message>
 	);
 };

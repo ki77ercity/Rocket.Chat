@@ -28,7 +28,6 @@ const fields: Fields = {
 	f: true,
 	t: true,
 	name: true,
-	disableNotifications: true,
 };
 
 type RoomMenuProps = {
@@ -83,7 +82,6 @@ const RoomMenu = ({
 	const subscription = useUserSubscription(rid, fields);
 	const canFavorite = useSetting('Favorite_Rooms');
 	const isFavorite = Boolean(subscription?.f);
-	const ifNotification = Boolean(subscription?.disableNotifications);
 
 	const dontAskHideRoom = useDontAskAgain('hideRoom');
 
@@ -91,10 +89,6 @@ const RoomMenu = ({
 	const readMessages = useEndpoint('POST', '/v1/subscriptions.read');
 	const toggleFavorite = useEndpoint('POST', '/v1/rooms.favorite');
 	const leaveRoom = useEndpoint('POST', leaveEndpoints[type]);
-	const NotificationsRooms = useEndpoint('POST', '/v1/rooms.saveNotification');
-	const notifications = {
-		disableNotifications: ifNotification ? '0' : '1',
-	};
 
 	const unreadMessages = useMethod('unreadMessages');
 
@@ -203,13 +197,6 @@ const RoomMenu = ({
 			dispatchToastMessage({ type: 'error', message: error });
 		}
 	});
-	const handleToggleNotifications = useMutableCallback(async () => {
-		try {
-			await NotificationsRooms({ roomId: rid, notifications});
-		} catch (error) {
-			dispatchToastMessage({ type: 'error', message: error });
-		}
-	});
 
 	const menuOptions = useMemo(
 		() => ({
@@ -233,13 +220,6 @@ const RoomMenu = ({
 							},
 					  }
 					: {}),
-				toggleNotification: {
-					label: {
-						label: !ifNotification ? 'Отключить уведомления' : 'Включить уведомления',
-						icon: !ifNotification ? 'bell-off' : 'bell',
-					},
-					action: handleToggleNotifications,
-				},
 				...(canLeave && {
 					leaveRoom: {
 						label: { label: t('Leave_room'), icon: 'sign-out' },
@@ -260,8 +240,6 @@ const RoomMenu = ({
 			handleToggleFavorite,
 			canLeave,
 			handleLeave,
-			ifNotification,
-			handleToggleNotifications,
 			isOmnichannelRoom,
 			prioritiesMenu,
 		],

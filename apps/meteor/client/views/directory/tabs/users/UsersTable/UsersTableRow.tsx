@@ -16,7 +16,7 @@ type UsersTableRowProps = {
 };
 
 const UsersTableRow = ({
-	user: { createdAt, emails, domain, _id, username, name, bio, avatarETag, nickname, customFields },
+	user: { createdAt, emails, domain, _id, username, name, bio, avatarETag, nickname },
 	onClick,
 	mediaQuery,
 	federation,
@@ -53,11 +53,6 @@ const UsersTableRow = ({
 			{mediaQuery && (
 				<GenericTableCell fontScale='p2' color='hint' withTruncatedText>
 					{formatDate(createdAt)}
-				</GenericTableCell>
-			)}
-			{mediaQuery && (
-				<GenericTableCell fontScale='p2' color='hint' withTruncatedText>
-					{(customFields?.['title'])}
 				</GenericTableCell>
 			)}
 		</GenericTableRow>

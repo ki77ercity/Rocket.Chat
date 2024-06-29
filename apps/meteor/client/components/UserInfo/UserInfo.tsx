@@ -1,10 +1,10 @@
 import type { IUser, Serialized } from '@rocket.chat/core-typings';
-import { Box, Icon, Margins, Tag, UrlInput } from '@rocket.chat/fuselage';
+import { Box, Margins, Tag } from '@rocket.chat/fuselage';
 import type { TranslationKey } from '@rocket.chat/ui-contexts';
 import { useTranslation } from '@rocket.chat/ui-contexts';
 import type { ReactElement, ReactNode } from 'react';
 import React, { memo } from 'react';
-import { Meteor } from 'meteor/meteor';
+
 import { useTimeAgo } from '../../hooks/useTimeAgo';
 import { useUserCustomFields } from '../../hooks/useUserCustomFields';
 import { useUserDisplayName } from '../../hooks/useUserDisplayName';
@@ -14,7 +14,6 @@ import MarkdownText from '../MarkdownText';
 import UTCClock from '../UTCClock';
 import UserCard from '../UserCard';
 import UserInfoAvatar from './UserInfoAvatar';
-import useClipboardWithToast from '/client/hooks/useClipboardWithToast';
 
 type UserInfoDataProps = Serialized<
 	Pick<
@@ -66,10 +65,6 @@ const UserInfo = ({
 	const timeAgo = useTimeAgo();
 	const userDisplayName = useUserDisplayName({ name, username });
 	const userCustomFields = useUserCustomFields(customFields);
-	const deepLink = Meteor.settings.DeepLink_Url
-	const host = Meteor.settings.Site_Url.replace(/^https?\:\/\//i, "");
-	const linkText = deepLink+'/room?host='+host+'&path=direct/'+username
-	const { copy } = useClipboardWithToast(linkText);
 
 	return (
 		<ContextualbarScrollableContent p={24} {...props}>
@@ -186,10 +181,6 @@ const UserInfo = ({
 							<InfoPanel.Text>{timeAgo(createdAt)}</InfoPanel.Text>
 						</InfoPanel.Field>
 					)}
-					<InfoPanel.Field>
-						<InfoPanel.Label>{'Ссылка на профиль'}</InfoPanel.Label>
-						<UrlInput value={linkText} addon={<Icon onClick={(): Promise<void> => copy()} name='copy' size='x20' />} />
-					</InfoPanel.Field>
 				</InfoPanel.Section>
 			</InfoPanel>
 		</ContextualbarScrollableContent>
